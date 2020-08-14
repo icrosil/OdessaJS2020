@@ -1,4 +1,4 @@
-class TrendChart extends Component {
+class RenderAxis extends Component {
   renderAxis() {
     const { hideDomain, textStyle, lineStyle, d3Axis, scale, renderAxis } = this.props;
 
