@@ -4,17 +4,21 @@ import clsx from 'clsx';
 
 import useStyles from './styles';
 
-export function Ribbon({ chords, color, ribbon, innerRadius, mouseOverGroup }) {
+function degreeToRadian(radian) {
+  return (radian / 180) * Math.PI;
+}
+
+export function Ribbon({ chords, color, ribbon, innerRadius, mouseOverGroup, arc }) {
   const classes = useStyles();
   const [mouseOverChord, setMouseOverChord] = useState(null);
 
   return (
     <g>
       {chords.map(d => {
-        const x1 = Math.cos((d.source.endAngle - d.source.startAngle) / 2 + d.source.startAngle - Math.PI / 2);
-        const y1 = Math.sin((d.source.endAngle - d.source.startAngle) / 2 + d.source.startAngle - Math.PI / 2);
-        const x2 = Math.cos((d.target.endAngle - d.target.startAngle) / 2 + d.target.startAngle - Math.PI / 2);
-        const y2 = Math.sin((d.target.endAngle - d.target.startAngle) / 2 + d.target.startAngle - Math.PI / 2);
+        const sourceAngles = arc.centroid(d.source);
+        const targetAngles = arc.centroid(d.target);
+        const [x1, y1] = sourceAngles.map(degreeToRadian);
+        const [x2, y2] = targetAngles.map(degreeToRadian);
 
         const isActiveChord =
           mouseOverGroup === d.source.index ||
@@ -58,6 +62,7 @@ Ribbon.propTypes = {
   chords: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   color: PropTypes.func.isRequired,
   ribbon: PropTypes.func.isRequired,
+  arc: PropTypes.func.isRequired,
   innerRadius: PropTypes.number.isRequired,
   mouseOverGroup: PropTypes.number.isRequired,
 };

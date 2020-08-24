@@ -11,6 +11,7 @@
     "d3-array": "^2.6.0",
     "d3-chord": "^2.0.0",
     "d3-scale": "^3.2.2",
+    "d3-shape": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3"
