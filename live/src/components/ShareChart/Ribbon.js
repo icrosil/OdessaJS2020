@@ -41,6 +41,7 @@ export function Ribbon({ chords, color, ribbon, innerRadius }) {
             </defs>
             <path
               onMouseOver={() => setMouseOverChord(`${d.source.index}-${d.target.index}`)}
+              onMouseOut={() => setMouseOverChord(null)}
               id={`ribbon-${d.source.index}-${d.target.index}`}
               className={clsx(classes.ribbon, {
                 [classes.ribbonActive]: isActiveChord,
@@ -51,7 +52,6 @@ export function Ribbon({ chords, color, ribbon, innerRadius }) {
           </g>
         );
       })}
-      <use onMouseOut={() => setMouseOverChord(null)} href={`#ribbon-${mouseOverChord}`} />
     </g>
   );
 }
