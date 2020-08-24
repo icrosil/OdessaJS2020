@@ -6,8 +6,8 @@ import clsx from 'clsx';
 import useStyles from './styles';
 import { LinearGradient } from '../SVG/LinearGradient';
 
-function degreeToRadian(radian) {
-  return (radian / 180) * Math.PI;
+function degreeToRadian(degree) {
+  return (degree / 180) * Math.PI;
 }
 
 export function Ribbon({ chords, color, ribbon, innerRadius }) {
