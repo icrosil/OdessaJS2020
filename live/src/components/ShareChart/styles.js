@@ -1,5 +1,7 @@
 import { createStyles, makeStyles } from '@material-ui/styles';
 
+export const groupColors = ['#17c3af', '#F00576', '#0C7CD3', '#8B14B0', '#0A5A73'];
+
 export default makeStyles(() =>
   createStyles({
     container: {

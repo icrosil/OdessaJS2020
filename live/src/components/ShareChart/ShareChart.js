@@ -5,8 +5,7 @@ import { scaleOrdinal } from 'd3-scale';
 import { arc } from 'd3-shape';
 import { Arc } from './Arc';
 import { Ribbon } from './Ribbon';
-
-const groupColors = ['#17c3af', '#F00576', '#0C7CD3', '#8B14B0', '#0A5A73'];
+import { groupColors } from './styles';
 
 export function ShareChart({ matrix, radius }) {
   const chords = chord().padAngle(0).sortSubgroups(descending)(matrix);
