@@ -2,7 +2,6 @@ import React from 'react';
 import { chord, ribbon } from 'd3-chord';
 import { descending } from 'd3-array';
 import { scaleOrdinal } from 'd3-scale';
-import { arc } from 'd3-shape';
 
 import { Ribbon } from './Ribbon';
 
@@ -28,12 +27,9 @@ const groupColors = ['#17c3af', '#F00576', '#0C7CD3', '#8B14B0', '#0A5A73'];
 const color = scaleOrdinal().range(groupColors);
 
 const ribbonD3 = ribbon().radius(radius);
-const arcD3 = arc()
-  .innerRadius(radius)
-  .outerRadius(radius + 20);
 
 export const SimpleRibbon = () => (
   <svg width={200} height={200} viewBox="-100 -100 200 200">
-    <Ribbon color={color} ribbon={ribbonD3} innerRadius={radius} chords={chords} arc={arcD3} />
+    <Ribbon color={color} ribbon={ribbonD3} innerRadius={radius} chords={chords} />
   </svg>
 );

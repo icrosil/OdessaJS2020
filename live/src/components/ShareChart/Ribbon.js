@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as PropTypes from 'prop-types';
+import { arc } from 'd3-shape';
 import clsx from 'clsx';
 
 import useStyles from './styles';
@@ -8,15 +9,16 @@ function degreeToRadian(radian) {
   return (radian / 180) * Math.PI;
 }
 
-export function Ribbon({ chords, color, ribbon, innerRadius, mouseOverGroup, arc }) {
+export function Ribbon({ chords, color, ribbon, innerRadius, mouseOverGroup }) {
   const classes = useStyles();
   const [mouseOverChord, setMouseOverChord] = useState(null);
 
   return (
     <g>
       {chords.map(d => {
-        const sourceAngles = arc.centroid(d.source);
-        const targetAngles = arc.centroid(d.target);
+        const arcD3 = arc().innerRadius(innerRadius).outerRadius(innerRadius);
+        const sourceAngles = arcD3.centroid(d.source);
+        const targetAngles = arcD3.centroid(d.target);
         const [x1, y1] = sourceAngles.map(degreeToRadian);
         const [x2, y2] = targetAngles.map(degreeToRadian);
 
@@ -26,7 +28,7 @@ export function Ribbon({ chords, color, ribbon, innerRadius, mouseOverGroup, arc
           `${d.source.index}-${d.target.index}` === mouseOverChord;
 
         return (
-          <g key={d}>
+          <g key={`${d.source.index}-${d.target.index}`}>
             <defs>
               <linearGradient
                 gradientUnits="userSpaceOnUse"
@@ -62,7 +64,6 @@ Ribbon.propTypes = {
   chords: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   color: PropTypes.func.isRequired,
   ribbon: PropTypes.func.isRequired,
-  arc: PropTypes.func.isRequired,
   innerRadius: PropTypes.number.isRequired,
   mouseOverGroup: PropTypes.number.isRequired,
 };
