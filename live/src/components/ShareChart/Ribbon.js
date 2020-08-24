@@ -4,6 +4,7 @@ import { arc } from 'd3-shape';
 import clsx from 'clsx';
 
 import useStyles from './styles';
+import { LinearGradient } from '../SVG/LinearGradient';
 
 function degreeToRadian(radian) {
   return (radian / 180) * Math.PI;
@@ -23,22 +24,18 @@ export function Ribbon({ chords, color, ribbon, innerRadius }) {
         const [x2, y2] = targetAngles.map(degreeToRadian);
 
         const isActiveChord = `${d.source.index}-${d.target.index}` === mouseOverChord;
-
+        const gradientId = `gradient-${d.source.index}-${d.target.index}`;
         return (
           <g key={`${d.source.index}-${d.target.index}`}>
-            <defs>
-              <linearGradient
-                gradientUnits="userSpaceOnUse"
-                id={`gradient-${d.source.index}-${d.target.index}`}
-                x1={innerRadius * x1}
-                y1={innerRadius * y1}
-                x2={innerRadius * x2}
-                y2={innerRadius * y2}
-              >
-                <stop offset="0%" stopColor={color(d.source.index)} />
-                <stop offset="100%" stopColor={color(d.target.index)} />
-              </linearGradient>
-            </defs>
+            <LinearGradient
+              id={gradientId}
+              colorFrom={color(d.source.index)}
+              colorTo={color(d.target.index)}
+              x1={innerRadius * x1}
+              x2={innerRadius * x2}
+              y1={innerRadius * y1}
+              y2={innerRadius * y2}
+            />
             <path
               onMouseOver={() => setMouseOverChord(`${d.source.index}-${d.target.index}`)}
               onMouseOut={() => setMouseOverChord(null)}
@@ -46,8 +43,8 @@ export function Ribbon({ chords, color, ribbon, innerRadius }) {
               className={clsx(classes.ribbon, {
                 [classes.ribbonActive]: isActiveChord,
               })}
-              fill={`url(#gradient-${d.source.index}-${d.target.index})`}
-              d={`${ribbon({ source: d.source, target: d.target })}`}
+              fill={`url(#${gradientId})`}
+              d={ribbon(d)}
             />
           </g>
         );
