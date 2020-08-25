@@ -1,14 +1,11 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { ShadowFilter } from '../SVG/Shadow';
-
 export function Arc({ componentId, chords, color, arc }) {
-  const filterId = 'dropshadow';
+  // TODO: add filter
   return (
     <g>
-      <ShadowFilter id={filterId} />
-      <g filter={`url(#${filterId})`}>
+      <g>
         {chords.groups.map(group => {
           return (
             <g key={group.index}>

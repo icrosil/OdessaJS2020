@@ -36,7 +36,10 @@ export function Bubble({ cx, cy, item, radius, border, patternName, hoveredMode,
 Bubble.propTypes = {
   cx: PropTypes.number.isRequired,
   cy: PropTypes.number.isRequired,
-  item: PropTypes.shape({}).isRequired,
+  item: PropTypes.shape({
+    pattern: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
   radius: PropTypes.number.isRequired,
   border: PropTypes.string,
   patternName: PropTypes.string,
