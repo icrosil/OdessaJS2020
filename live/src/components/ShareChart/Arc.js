@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { ShadowFilter } from '../SVGFilter/Shadow';
+import { ShadowFilter } from '../SVG/Shadow';
 
 export function Arc({ componentId, chords, color, arc }) {
   const filterId = 'dropshadow';
