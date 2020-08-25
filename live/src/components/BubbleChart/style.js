@@ -9,9 +9,11 @@ export const palette = [
 ];
 
 export const useBubbleStyles = makeStyles({
-  bubble: {
+  bubble: ({ cx, cy }) => ({
+    transform: `translate(${cx}px, ${cy}px)`,
+    transition: 'all 0.7s ease-in-out',
     cursor: 'pointer',
-  },
+  }),
   text: {
     textTransform: 'uppercase',
     color: 'white',

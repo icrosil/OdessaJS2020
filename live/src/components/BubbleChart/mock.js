@@ -10,5 +10,6 @@ export function generateData(width = 200, height = 200, size = 15) {
       x: getRandomFromTo(0, width),
       r: getRandomFromTo(10, 30),
       name: `random_${index}`,
+      pattern: getRandomFromTo(0, 4),
     }));
 }
