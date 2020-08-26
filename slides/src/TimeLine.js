@@ -9,13 +9,12 @@ function TimeLine({ viewBox, svgProps }) {
   return (
     <section>
       <svg {...svgProps}>
-        <Stripe color={colors.stripe} />
-        <Gradient />
-        <Path />
-        {data.map(({ date, value }) => (
-          <Circle key={`${date}_${value}`} />
+        <Stripe color={colors.stripe} scale={yScale} />
+        {data.map(({ line, id }) => (
+          <GradientLine key={id} data={line} />
         ))}
-        <Axis scale={xScale} translateY={dimension.height} />
+        <AxisX scale={xScale} translateY={dimension.height} />
+        <AxisY scale={yScale} />
       </svg>
     </section>
   );
