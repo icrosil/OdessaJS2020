@@ -14,16 +14,15 @@ export function Ribbon({ chords, ribbon }) {
 
   return (
     <g>
-      {chords.map(d => {
-        // TODO: add gradient
+      {chords.map(chord => {
+        const chordId = `${chord.source.index}-${chord.target.index}`;
         return (
-          <g key={`${d.source.index}-${d.target.index}`}>
+          <g key={chordId}>
             <path
-              onMouseOver={() => setMouseOverChord(`${d.source.index}-${d.target.index}`)}
+              onMouseOver={() => setMouseOverChord(chordId)}
               onMouseOut={() => setMouseOverChord(null)}
-              id={`ribbon-${d.source.index}-${d.target.index}`}
               className={clsx(classes.ribbon)}
-              d={ribbon(d)}
+              d={ribbon(chord)}
             />
           </g>
         );
